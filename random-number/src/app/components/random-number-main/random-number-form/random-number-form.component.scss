@@ -1,0 +1,20 @@
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0; /* some margin could be still present even though it's hidden */
+}
+
+input[type="number"] {
+  -moz-appearance: textfield; /* Firefox */
+}
+
+:host {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+mat-card {
+  padding: 24px 32px;
+}

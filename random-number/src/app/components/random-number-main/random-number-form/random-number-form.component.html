@@ -1,0 +1,60 @@
+<mat-card appearance="outlined">
+  <mat-card-header
+    ><mat-card-title class="mb-4"
+      >Random number generator</mat-card-title
+    ></mat-card-header
+  >
+  <mat-card-content class="mb-2">
+    <form [formGroup]="randomNumberForm" (ngSubmit)="onSubmit()">
+      <div class="container">
+        <div class="row align-items-center mb-2">
+          <span class="col-5 mat-body-1">Favorite number: </span>
+          <mat-form-field class="col-7 d-flex align-items-center">
+            <mat-label>Select number</mat-label>
+            <mat-select [formControl]="randomNumberForm.controls.lastNumber">
+              <ng-container *ngFor="let num of possibleNumbers">
+                <mat-option [value]="num">{{ num }}</mat-option>
+              </ng-container>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <div class="row align-items-center">
+          <span class="col-5 mat-body-1">Number length: </span>
+          <mat-form-field class="col-7">
+            <mat-label>Enter length</mat-label>
+            <input
+              type="number"
+              matInput
+              [formControl]="randomNumberForm.controls.numberLength"
+            />
+            <mat-error
+              *ngIf="
+                randomNumberForm.controls.numberLength.invalid && submitted
+              "
+            >
+              Field is required
+            </mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+      <mat-card-actions class="d-flex justify-content-between">
+        <button
+          [disabled]="isValidSubmittedForm()"
+          type="submit"
+          mat-flat-button
+        >
+          Submit
+        </button>
+        <button mat-flat-button color="warn" type="button" (click)="onStop()">
+          Stop
+        </button>
+      </mat-card-actions>
+    </form>
+    @if(isValidSubmittedForm()){
+    <app-random-number-generator
+      [lastNumber]="lastNumberValue"
+      [numberLength]="numberLengthValue"
+    ></app-random-number-generator>
+    }
+  </mat-card-content>
+</mat-card>
