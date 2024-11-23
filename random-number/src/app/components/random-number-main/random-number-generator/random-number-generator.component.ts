@@ -36,8 +36,8 @@ export class RandomNumberGeneratorComponent implements OnDestroy {
   }
 
   public timer(lastNumber: number, numberLength: number) {
-    const minValue = Math.pow(10, numberLength - 1); // Lowest posible number
-    const maxValue = Math.pow(10, numberLength) - 1; // Highest posible number
+    const minValue = Math.pow(10, numberLength - 1); // Lowest possible number
+    const maxValue = Math.pow(10, numberLength) - 1; // Highest possible number
 
     timer(0, 5000)
       .pipe(
