@@ -7,7 +7,7 @@
   <mat-card-content class="mb-2">
     <form [formGroup]="randomNumberForm" (ngSubmit)="onSubmit()">
       <div class="container">
-        <div class="row align-items-center mb-2">
+        <div class="row align-items-center mb-4">
           <span class="col-5 mat-body-1">Favorite number: </span>
           <mat-form-field class="col-7 d-flex align-items-center">
             <mat-label>Select number</mat-label>
@@ -16,6 +16,9 @@
                 <mat-option [value]="num">{{ num }}</mat-option>
               </ng-container>
             </mat-select>
+            @if( randomNumberForm.controls.lastNumber.invalid && submitted ){
+            <mat-error> Field is required </mat-error>
+            }
           </mat-form-field>
         </div>
         <div class="row align-items-center">
@@ -27,13 +30,9 @@
               matInput
               [formControl]="randomNumberForm.controls.numberLength"
             />
-            <mat-error
-              *ngIf="
-                randomNumberForm.controls.numberLength.invalid && submitted
-              "
-            >
-              Field is required
-            </mat-error>
+            @if( randomNumberForm.controls.numberLength.invalid && submitted ){
+            <mat-error> Field is required </mat-error>
+            }
           </mat-form-field>
         </div>
       </div>
