@@ -41,8 +41,6 @@ export class RandomNumberGeneratorComponent implements OnDestroy {
 
     timer(0, 5000)
       .pipe(
-        //Leakage memory prevention
-        takeUntil(merge(this.destroy$, this.invalidNumberDestoyer$)),
         tap(() => {
           this.evaluatedNumber = Math.floor(
             minValue + Math.random() * (maxValue - minValue)
@@ -58,7 +56,9 @@ export class RandomNumberGeneratorComponent implements OnDestroy {
           } else this.resultPlaceholder = PlaceholderStates.CORRECT_NUMBER;
 
           this.cd.detectChanges();
-        })
+        }),
+        //Leakage memory prevention
+        takeUntil(merge(this.destroy$, this.invalidNumberDestoyer$))
       )
       .subscribe();
   }
